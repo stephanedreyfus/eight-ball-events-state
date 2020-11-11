@@ -1,0 +1,10 @@
+.ball-container {
+  background: white;
+  height: 25%;
+  width: 25%;
+  margin: auto;
+}
+
+.ball {
+  border-radius: 50%;
+}
