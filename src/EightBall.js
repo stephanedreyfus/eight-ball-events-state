@@ -1,3 +1,7 @@
+import React, { useState } from "react";
+
+const initial = {msg: "Think of a question.", color: "black"};
+
 const answers = [
   { msg: "It is certain.", color: "green" },
   { msg: "It is decidedly so.", color: "green" },
@@ -19,14 +23,24 @@ const answers = [
   { msg: "My sources say no.", color: "red" },
   { msg: "Outlook not so good.", color: "red" },
   { msg: "Very doubtful.", color: "red" },
-]
+];
+
 
 const EightBall = () => {
-  <div className="ball-container">
-    <div className="ball" style={{background: 'black'}}>
+  const [info, setInfo] = useState(initial);
+  
+  const handleClick = e => {
+    console.log(e.target);
+    setInfo(answers[Math.floor(Math.random * answers.length)]);
+  }
 
+  return (
+    <div className="ball-container">
+      <div className="ball" style={{background: info.color}} onClick={handleClick}>
+        {info.msg}
+      </div>
     </div>
-  </div>
+  );
 }
 
 export default EightBall;
