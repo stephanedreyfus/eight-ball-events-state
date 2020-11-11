@@ -1,10 +1,22 @@
 .ball-container {
   background: white;
-  height: 25%;
-  width: 25%;
+  height: 50%;
+  width: 50%;
   margin: auto;
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
 
 .ball {
   border-radius: 50%;
+  height: 300px;
+  width: 300px;
+  justify-content: center;
+  display: flex;
+}
+
+.ball-text {
+  color: white;
+  text-align: center;
 }

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './EightBall.css';
 
 const initial = {msg: "Think of a question.", color: "black"};
 
@@ -31,13 +32,14 @@ const EightBall = () => {
   
   const handleClick = e => {
     console.log(e.target);
-    setInfo(answers[Math.floor(Math.random * answers.length)]);
+    setInfo(answers[Math.floor(Math.random() * answers.length)]);
+    console.log(info)
   }
 
   return (
     <div className="ball-container">
       <div className="ball" style={{background: info.color}} onClick={handleClick}>
-        {info.msg}
+        <span className="ball-text">{info.msg}</span>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 .App {
-  text-align: center;
-  background: gray;
-  display: flex;
   align-content: center;
+  display: flex;
+  height: 1000px;
+  width: 1000px;
+  margin: 20vh 50vh;
 }
