@@ -30,10 +30,8 @@ const answers = [
 const EightBall = () => {
   const [info, setInfo] = useState(initial);
   
-  const handleClick = e => {
-    console.log(e.target);
+  const handleClick = () => {
     setInfo(answers[Math.floor(Math.random() * answers.length)]);
-    console.log(info)
   }
 
   return (
