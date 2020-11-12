@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Reset from './Reset';
 import './EightBall.css';
 
 const initial = {msg: "Think of a question.", color: "black"};
@@ -34,13 +35,18 @@ const EightBall = () => {
     setInfo(answers[Math.floor(Math.random() * answers.length)]);
   }
 
+  const handleReset = () => {
+    setInfo(initial);
+  }
+
   return (
     <div className="ball-container">
       <div className="ball" style={{background: info.color}} onClick={handleClick}>
         <span className="ball-text">{info.msg}</span>
       </div>
+      <Reset handleReset={handleReset}/>
     </div>
   );
-}
+};
 
 export default EightBall;
