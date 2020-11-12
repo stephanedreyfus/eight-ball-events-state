@@ -1,4 +1,10 @@
 .reset {
   background: lightgray;
   text-align: center;
+  margin: 10% auto;
+  width: 25%;
+  height: 7%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
