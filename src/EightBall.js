@@ -31,7 +31,13 @@ const answers = [
 
 const EightBall = () => {
   const [info, setInfo] = useState(initial);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(
+      {
+        green: 0,
+        golden: 0,
+        red: 0,
+      }
+    );
   
   const handleClick = () => {
     setInfo(answers[Math.floor(Math.random() * answers.length)]);
@@ -41,17 +47,13 @@ const EightBall = () => {
     setInfo(initial);
   }
 
-  const handleCount = (color) => {
-    
-  }
-
   return (
     <div className="ball-container">
       <div className="ball" style={{background: info.color}} onClick={handleClick}>
         <span className="ball-text">{info.msg}</span>
       </div>
       <Reset handleReset={handleReset}/>
-      <ColorCount onClick={handleCount}/>
+      <ColorCount seen={count}/>
     </div>
   );
 };
