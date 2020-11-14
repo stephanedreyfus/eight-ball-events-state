@@ -28,35 +28,35 @@ const answers = [
   { msg: "Very doubtful.", color: "red" },
 ];
 
+const zeroCount = {green: 0, golden: 0, red: 0};
+
 
 const EightBall = () => {
   const [info, setInfo] = useState(initial);
-  const [count, setCount] = useState(
-      {
-        green: 0,
-        golden: 0,
-        red: 0,
-      }
-    );
+  const [count, setCount] = useState(zeroCount);
   
+  // FIX ME: Due to state timing, color count is off.
   const handleClick = () => {
+    console.log("Info before:", info.color);
     setInfo(answers[Math.floor(Math.random() * answers.length)]);
+    console.log("Info right after:", info.color);
     if (info.color === "red") {
       let addOne = {red: (count.red += 1)};
       setCount({...count, ...addOne});
     }
     else if (info.color === "goldenrod") {
-      let addOne = {red: (count.golden += 1)};
+      let addOne = {golden: (count.golden += 1)};
       setCount({...count, ...addOne});
     }
-    else {
-      let addOne = {red: (count.green += 1)};
+    else if (info.color === "green") {
+      let addOne = {green: (count.green += 1)};
       setCount({...count, ...addOne});
     };
   };
 
   const handleReset = () => {
     setInfo(initial);
+    setCount(zeroCount);
   }
 
   return (
