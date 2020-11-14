@@ -41,7 +41,19 @@ const EightBall = () => {
   
   const handleClick = () => {
     setInfo(answers[Math.floor(Math.random() * answers.length)]);
-  }
+    if (info.color === "red") {
+      let addOne = {red: (count.red += 1)};
+      setCount({...count, ...addOne});
+    }
+    else if (info.color === "goldenrod") {
+      let addOne = {red: (count.golden += 1)};
+      setCount({...count, ...addOne});
+    }
+    else {
+      let addOne = {red: (count.green += 1)};
+      setCount({...count, ...addOne});
+    };
+  };
 
   const handleReset = () => {
     setInfo(initial);
