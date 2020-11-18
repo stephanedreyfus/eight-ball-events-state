@@ -60,8 +60,6 @@ const EightBall = () => {
     setCount(zeroCount);
   }
 
-  console.log("What is count before return?", count);
-
   return (
     <div className="ball-container">
       <div className="ball" style={{background: info.current.color}} onClick={handleClick}>
