@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Reset from './Reset';
 import useAsyncReference from './helpers';
 import ColorCount from './ColorCount';
@@ -33,24 +33,23 @@ const zeroCount = {green: 0, golden: 0, red: 0};
 
 
 const EightBall = () => {
-  const [info, setInfo] = useState(initial);
+  const [info, setInfo] = useAsyncReference(initial);
   const [count, setCount] = useAsyncReference(zeroCount);
   
   // FIX ME: Due to state timing, color count is off.
   const handleClick = () => {
 
-    console.log("Info before:", info.color);
     setInfo(answers[Math.floor(Math.random() * answers.length)]);
-    console.log("Info right after:", info.color);
-    if (info.color === "red") {
+
+    if (info.current.color === "red") {
       let addOne = {red: (count.current.red += 1)};
       setCount({...count.current, ...addOne});
     }
-    else if (info.color === "goldenrod") {
+    else if (info.current.color === "goldenrod") {
       let addOne = {golden: (count.current.golden += 1)};
       setCount({...count.current, ...addOne});
     }
-    else if (info.color === "green") {
+    else if (info.current.color === "green") {
       let addOne = {green: (count.current.green += 1)};
       setCount({...count.current, ...addOne});
     };
@@ -65,8 +64,8 @@ const EightBall = () => {
 
   return (
     <div className="ball-container">
-      <div className="ball" style={{background: info.color}} onClick={handleClick}>
-        <span className="ball-text">{info.msg}</span>
+      <div className="ball" style={{background: info.current.color}} onClick={handleClick}>
+        <span className="ball-text">{info.current.msg}</span>
       </div>
       <Reset handleReset={handleReset}/>
       <ColorCount count={count.current}/>
