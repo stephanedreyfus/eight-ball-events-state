@@ -61,13 +61,15 @@ const EightBall = () => {
     setCount(zeroCount);
   }
 
+  console.log("What is count before return?", count);
+
   return (
     <div className="ball-container">
       <div className="ball" style={{background: info.color}} onClick={handleClick}>
         <span className="ball-text">{info.msg}</span>
       </div>
       <Reset handleReset={handleReset}/>
-      <ColorCount seen={count}/>
+      <ColorCount count={count.current}/>
     </div>
   );
 };
