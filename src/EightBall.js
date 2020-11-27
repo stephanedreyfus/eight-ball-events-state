@@ -8,7 +8,6 @@ const EightBall = ({ answers, initial, zeroCount }) => {
   const [info, setInfo] = useAsyncReference(initial);
   const [count, setCount] = useAsyncReference(zeroCount);
   
-  // FIX ME: Due to state timing, color count is off.
   const handleClick = () => {
     console.log("What is zerocount?", zeroCount);
     console.log("What is initial?", initial);
@@ -29,8 +28,8 @@ const EightBall = ({ answers, initial, zeroCount }) => {
   };
 
   const handleReset = () => {
-    setInfo(initial);
-    setCount(zeroCount);
+    setInfo(initial, true);
+    setCount(zeroCount, true);
   }
 
   return (
