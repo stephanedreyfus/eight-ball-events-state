@@ -1,46 +1,50 @@
-import React, { useState } from "react";
+// This files contains examples of React misunderstandings. Not only do I mutate state
+// In the setCount with '+=', but I am dealing with 'stale' state not because
+// of state, but because I'm changig info, which doesn't change during the function!
+
+import React from "react";
 import Reset from './Reset';
+import useAsyncReference from './helpers';
 import ColorCount from './ColorCount';
 import './EightBall.css';
 
 const EightBall = ({ answers, initial, zeroCount }) => {
-  console.log("render");
-  // const [info, setInfo] = useAsyncReference(initial);
-  // const [count, setCount] = useAsyncReference(zeroCount);
+  const [info, setInfo] = useAsyncReference(initial);
+  console.log("zeroCount before initialize state", zeroCount);
+  const [count, setCount] = useAsyncReference(zeroCount);
+  console.log("zeroCount after initialize state", zeroCount);
   
-  const [info, setInfo] = useState(initial);
-  const [count, setCount] = useState(zeroCount);
-
   const handleClick = () => {
-    console.log("What is zerocount?", zeroCount);
+    console.log("What is zerocount at top of click?", zeroCount);
     console.log("What is initial?", initial);
-    const newInfo = answers[Math.floor(Math.random() * answers.length)];
-    setInfo(newInfo);
+    setInfo(answers[Math.floor(Math.random() * answers.length)]);
 
-    if (newInfo.color === "red") {
-      setCount(c => ({...c, ...{red: (c.red + 1)}}));
+    if (info.current.color === "red") {
+      let addOne = {red: (count.current.red += 1)};
+      setCount({...count.current, ...addOne});
     }
-    else if (newInfo.color === "goldenrod") {
-      setCount(c => ({...c, ...{golden: (c.golden + 1)}}));
+    else if (info.current.color === "goldenrod") {
+      let addOne = {golden: (count.current.golden += 1)};
+      setCount({...count.current, ...addOne});
     }
-    else if (newInfo.color === "green") {
-      setCount(c => ({...c, ...{green: (c.green + 1)}}));
-    }
+    else if (info.current.color === "green") {
+      let addOne = {green: (count.current.green += 1)};
+      setCount({...count.current, ...addOne});
+    };
   };
 
   const handleReset = () => {
-    setInfo(initial);
-    setCount(zeroCount);
-    console.log("reset", initial, zeroCount);
+    setInfo(initial, true);
+    setCount(zeroCount, true);
   }
 
   return (
     <div className="ball-container">
-      <div className="ball" style={{background: info.color}} onClick={handleClick}>
-        <span className="ball-text">{info.msg}</span>
+      <div className="ball" style={{background: info.current.color}} onClick={handleClick}>
+        <span className="ball-text">{info.current.msg}</span>
       </div>
       <Reset handleReset={handleReset}/>
-      <ColorCount count={count}/>
+      <ColorCount count={count.current}/>
     </div>
   );
 };
@@ -72,4 +76,4 @@ EightBall.defaultProps = {
   zeroCount: {green: 0, golden: 0, red: 0}
 }
 
-export default EightBall;
+export default EightBall; 

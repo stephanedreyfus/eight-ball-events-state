@@ -1,4 +1,7 @@
-// Various helper functions.
+// Various helper functions, though none currently used as I did not 
+// actually have async state to deal with, I was just using old state
+// instead of up to date state. Leaving this here for reference.
+
 import { useRef, useState } from 'react';
 /**
  * Ref using custome hook to solve stale state issues.
